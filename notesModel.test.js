@@ -8,12 +8,14 @@ describe('notesModel class', () => {
 
   it('adds new note in the array', () => {
     const notes = new NotesModel();
-    expect(notes.addNote('Buy milk')).toEqual(['Buy milk']);
+    notes.addNote('Buy milk');
+    expect(notes.notes).toEqual(['Buy milk']);
   });
 
   it('gets all notes from a note array', () => {
     const notes = new NotesModel();
-    notes.addNote('Buy milk', 'Go to the gym');
+    notes.addNote('Buy milk');
+    notes.addNote('Go to the gym');
     expect(notes.getNotes()).toEqual(['Buy milk', 'Go to the gym']);
   });
 

@@ -6,4 +6,7 @@
 
 console.log('The notes app is running!');
 
-const notesModel = require('./notesModel');
+newNote = new NotesModel;
+console.log(newNote.getNotes());
+
+const NotesModel = require('./notesModel');
