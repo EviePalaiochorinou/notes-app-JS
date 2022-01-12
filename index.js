@@ -4,10 +4,16 @@
 // to help in debugging and getting visibility in your JS code.
 //
 // on Mac (using Chrome), use Option+Command+J to open the console and see this message.
+const NotesModel = require('./notesModel');
+const NotesView = require('./notesView');
 
 console.log('The notes app is running!');
 
-newNote = new NotesModel;
+const newNote = new NotesModel;
 console.log(newNote.getNotes());
+newNote.addNote('This is an example note');
 
-const NotesModel = require('./notesModel');
+const newView = new NotesView(newNote);
+newView.displayNotes();
+
+
