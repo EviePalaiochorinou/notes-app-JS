@@ -37,9 +37,13 @@
           document.querySelector("#note-button").addEventListener("click", () => {
             const userNote = document.querySelector("#note-input").value;
             this.addNewNote(userNote);
+            document.querySelector("#note-input").value = "";
           });
         }
         displayNotes() {
+          document.querySelectorAll(".note").forEach((element) => {
+            element.remove();
+          });
           const notes = this.model.getNotes();
           notes.forEach((note) => {
             const noteEl = document.createElement("div");
@@ -64,5 +68,5 @@
   var newNote = new NotesModel();
   console.log(newNote.getNotes());
   var newView = new NotesView(newNote);
-  newView.addNewNote();
+  newView.displayNotes();
 })();

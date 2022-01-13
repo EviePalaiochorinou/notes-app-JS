@@ -10,10 +10,14 @@ class NotesView {
     document.querySelector('#note-button').addEventListener('click', () => {
       const userNote = document.querySelector('#note-input').value;
       this.addNewNote(userNote);
+      document.querySelector('#note-input').value = "";
     });
   }
 
   displayNotes() {
+    document.querySelectorAll('.note').forEach((element) => {
+      element.remove();
+    });
     const notes = this.model.getNotes();
 
     // For each note, create and append a new element on the main container

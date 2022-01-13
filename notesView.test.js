@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /**
  * @jest-environment jsdom
  */
@@ -24,12 +23,25 @@ describe('Notes view', () => {
     document.body.innerHTML = fs.readFileSync('./index.html');
 
     const notes = new NotesModel();
-    const notesView = NotesView(notes);
+    const notesView = new NotesView(notes);
     const input = document.querySelector('#note-input');
     input.value = 'New user note';
     const button = document.querySelector('#note-button');
     button.click();
     expect(document.querySelectorAll('div.note').length).toEqual(1);
-    expect(document.querySelectorAll('div.note')[0].innerText).toEqual('My new amazing test note');
+    expect(document.querySelectorAll('div.note')[0].innerText).toEqual('New user note');
+  });
+
+  it('verifies the correct number of notes is displayed', () => {
+    document.body.innerHTML = fs.readFileSync('./index.html');
+
+    const model = new NotesModel();
+    const view = new NotesView(model);
+    model.addNote('one');
+    model.addNote('two');
+
+    view.displayNotes();
+    view.displayNotes();
+    expect(document.querySelectorAll('div.note').length).toEqual(2);
   });
 });

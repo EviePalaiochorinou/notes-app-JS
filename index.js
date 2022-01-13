@@ -14,7 +14,7 @@ console.log(newNote.getNotes());
 //newNote.addNote('This is an example note');
 
 const newView = new NotesView(newNote);
-//newView.displayNotes();
-newView.addNewNote();
+newView.displayNotes();
+//newView.addNewNote(userNote);  WHY NOT USE ADDNEWNOTE??
 
 
