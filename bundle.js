@@ -33,6 +33,11 @@
         constructor(model) {
           this.model = model;
           this.mainContainerEl = document.querySelector("#main-container");
+          this.button = document.querySelector("#note-button");
+          document.querySelector("#note-button").addEventListener("click", () => {
+            const userNote = document.querySelector("#note-input").value;
+            this.addNewNote(userNote);
+          });
         }
         displayNotes() {
           const notes = this.model.getNotes();
@@ -42,6 +47,10 @@
             noteEl.className = "note";
             this.mainContainerEl.append(noteEl);
           });
+        }
+        addNewNote(note) {
+          this.model.addNote(note);
+          this.displayNotes();
         }
       };
       module.exports = NotesView2;
@@ -54,7 +63,6 @@
   console.log("The notes app is running!");
   var newNote = new NotesModel();
   console.log(newNote.getNotes());
-  newNote.addNote("This is an example note");
   var newView = new NotesView(newNote);
-  newView.displayNotes();
+  newView.addNewNote();
 })();

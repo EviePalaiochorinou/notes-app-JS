@@ -11,9 +11,10 @@ console.log('The notes app is running!');
 
 const newNote = new NotesModel;
 console.log(newNote.getNotes());
-newNote.addNote('This is an example note');
+//newNote.addNote('This is an example note');
 
 const newView = new NotesView(newNote);
-newView.displayNotes();
+//newView.displayNotes();
+newView.addNewNote();
 
 
