@@ -6,15 +6,16 @@
 // on Mac (using Chrome), use Option+Command+J to open the console and see this message.
 const NotesModel = require('./notesModel');
 const NotesView = require('./notesView');
+const NotesApi = require('./notesApi');
 
 console.log('The notes app is running!');
 
-const newNote = new NotesModel;
-console.log(newNote.getNotes());
-//newNote.addNote('This is an example note');
+const api = new NotesApi();
+const model = new NotesModel();
+const view = new NotesView(model, api);
 
-const newView = new NotesView(newNote);
-newView.displayNotes();
-//newView.addNewNote(userNote);  WHY NOT USE ADDNEWNOTE??
-
-
+api.loadNotes((notes) => {
+  // This method is new — you'll need to add it to the model class
+  model.setNotes(notes);
+  view.displayNotes();
+});
