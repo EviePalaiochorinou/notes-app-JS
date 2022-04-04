@@ -1,16 +1,31 @@
 /* eslint-disable require-jsdoc */
 const NotesModel = require('./notesModel');
+const NotesApi = require('./notesApi');
 
 class NotesView {
-  constructor(model) {
+  constructor(model, api) {
     this.model = model;
+    this.api = api;
     this.mainContainerEl = document.querySelector('#main-container');
     this.button = document.querySelector('#note-button');
 
     document.querySelector('#note-button').addEventListener('click', () => {
       const userNote = document.querySelector('#note-input').value;
-      this.addNewNote(userNote);
-      document.querySelector('#note-input').value = "";
+      // this.addNewNote(userNote);
+      // document.querySelector('#note-input').value = "";
+      if (userNote) {
+        this.api.createNote(userNote, (res) => {
+          this.model.setNotes(res);
+          this.displayNotes();
+          document.querySelector('#note-input').value = '';
+        });
+      }
+    });
+
+    document.querySelector('#reset-button').addEventListener('click', () => {
+      this.api.resetNotes();
+      this.model.reset();
+      this.displayNotes();
     });
   }
 
@@ -29,9 +44,16 @@ class NotesView {
     });
   }
 
-  addNewNote(note) {
-    this.model.addNote(note);
-    this.displayNotes();
+  // addNewNote(note) {
+  //   this.model.addNote(note);
+  //   this.displayNotes();
+  // }
+
+  displayError() {
+    const errorEl = document.createElement('p');
+    errorEl.innerText = 'Oops, something went wrong!';
+    errorEl.className = 'error';
+    this.mainContainerEl.append(errorEl);
   }
 }
 
